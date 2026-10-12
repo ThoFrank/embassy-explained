@@ -51,7 +51,7 @@ If some work needs a guaranteed reaction time, you can run more than one executo
 This way you can for example run a motor control loop on a high priority executor while networking and logging run on the low priority thread mode executor.
 Tasks on different executors communicate through the primitives in `embassy-sync` (channels, signals, mutexes), which are safe to use across priority levels.
 
-> **Tip:** Check out the [From Zero to Async in Embedded Rust - The Rusty Bits](https://www.youtube.com/watch?v=wni5h5vIPhU) video for a deep dive into concurrency in microcontrollers and how async rust works under the hood.
+> **Tip:** Check out the [From Zero to Async in Embedded Rust - The Rusty Bits](https://www.youtube.com/watch?v=wni5h5vIPhU) video for a deep dive into concurrency in microcontrollers and how async Rust works under the hood.
 
 ## embassy-time
 Almost every program needs to wait for something. [`embassy-time`](https://docs.embassy.dev/embassy-time/) provides `Timer`, `Instant`, `Duration` and `Ticker` together with async delays like `Timer::after_millis(100).await`.
@@ -61,7 +61,7 @@ The time source is a hardware timer provided by the HAL. For `embassy-stm32` you
 [`embassy-sync`](https://docs.embassy.dev/embassy-sync/) contains synchronization primitives which work without an operating system:
 - `Channel` - a bounded queue to send messages between tasks
 - `Signal` - notifies a task that a value changed, only keeps the latest value
-- `Mutex` - an async mutex for sharing a resource (e.g. a SPI bus) between tasks
+- `Mutex` - an async mutex for sharing a resource (e.g. an SPI bus) between tasks
 - `Watch` / `PubSubChannel` - one producer, many consumers
 
 ## embassy-stm32
@@ -90,7 +90,7 @@ Some vendor HALs outside the Embassy project, like [`esp-hal`](https://docs.rs/e
 
 ## embassy-net
 Networking is hard. A TCP/IP stack has to answer ARP requests, retransmit lost packets, renew DHCP leases and handle timeouts, even while your application is not sending or receiving anything.
-[`embassy-net`](https://docs.embassy.dev/embassy-net/) wraps the [`smoltcp`](https://docs.rs/smoltcp)(will be replaced soon by [`xarxa`](https://github.com/embassy-rs/xarxa)) stack and gives it an async interface.
+[`embassy-net`](https://docs.embassy.dev/embassy-net/) wraps the [`smoltcp`](https://docs.rs/smoltcp) (soon to be replaced by [`xarxa`](https://github.com/embassy-rs/xarxa)) stack and gives it an async interface.
 
 The important part to understand is that the stack needs its own background task which keeps it running:
 
@@ -121,7 +121,7 @@ Memory for sockets is reserved statically with `StackResources<N>`, so you have 
 
 ## embassy-boot
 When devices are deployed in the field you want to update their firmware without a debugger attached.
-[`embassy-boot`](https://docs.embassy.dev/embassy-boot/) is a bootloader that makes this possible. Chip specific integrations exist as `embassy-boot-stm32`, `embassy-boot-nrf` and `embassy-boot-rp`.
+[`embassy-boot`](https://docs.embassy.dev/embassy-boot/) is a bootloader that makes this possible. Chip-specific integrations exist as `embassy-boot-stm32`, `embassy-boot-nrf` and `embassy-boot-rp`.
 
 It splits the flash into four partitions:
 - **BOOTLOADER** - the bootloader itself
@@ -132,10 +132,10 @@ It splits the flash into four partitions:
 An update works like this:
 1. The running application receives the new image (over network, USB, UART, ...) and writes it to the DFU partition using the `FirmwareUpdater`.
 2. It marks the update as ready and resets.
-3. The bootloader swaps ACTIVE and DFU page by page. This is power fail safe: if power is lost, the swap continues at the next boot.
+3. The bootloader swaps ACTIVE and DFU page by page. This is power-fail safe: if power is lost, the swap continues at the next boot.
 4. The new firmware has to confirm that it works by calling `mark_booted`. If it does not (e.g. because it crashes), the bootloader swaps back to the old firmware on the next reset.
 
-Optionally images can be signed with ed25519 so that only firmware from you is accepted.
+Optionally, images can be signed with ed25519 so that only firmware from you is accepted.
 
 ### When you might need a custom bootloader
 `embassy-boot` is a good starting point, but it does not fit every project. You may have to write your own, or extend it, if:

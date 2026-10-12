@@ -31,7 +31,7 @@ impl<I: I2c> TempSensor<I> {
         Self { i2c }
     }
 
-    /// Returns the temperature in degree Celsius.
+    /// Returns the temperature in degrees Celsius.
     pub async fn read_temperature(&mut self) -> Result<f32, I::Error> {
         let mut buf = [0u8; 2];
         self.i2c.write_read(ADDRESS, &[REG_TEMP], &mut buf).await?;

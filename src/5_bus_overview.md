@@ -20,7 +20,7 @@ let mut buf = [0u8; 2];
 i2c.write_read(SENSOR_ADDR, &[REG_TEMP], &mut buf).await?;
 ```
 
-- **UART** - point to point, one device per bus. The driver owns the UART (or its `tx`/`rx` halves after `split()`) and talks to it through [`embedded-io-async`](https://docs.rs/embedded-io-async).
+- **UART** - point-to-point, one device per bus. The driver owns the UART (or its `tx`/`rx` halves after `split()`) and talks to it through [`embedded-io-async`](https://docs.rs/embedded-io-async).
 - **I2C** - two wires, up to ~1 MHz, every device has an address. Many devices share the same two wires.
 - **SPI** - four wires, tens of MHz, every device has its own chip select (CS) pin. Many devices share SCK/MOSI/MISO.
 

@@ -1,9 +1,9 @@
 # Common Tasks
 
 This chapter walks through tasks you will face again and again when building firmware with Embassy:
-- [Writing a Device Driver](./5_common_tasks/1_writing_a_driver.md) for a chip or device connected to your MCU
-- [Implementing Application Logic](./5_common_tasks/2_application_logic.md) such as connecting tasks or serving HTTP
-- [Porting to a new MCU](./5_common_tasks/3_porting_to_new_mcu.md) when the hardware changes
+- [Writing a Device Driver](./6_common_tasks/1_writing_a_driver.md) for a chip or device connected to your MCU
+- [Implementing Application Logic](./6_common_tasks/2_application_logic.md) such as connecting tasks or serving HTTP
+- [Porting to a new MCU](./6_common_tasks/3_porting_to_new_mcu.md) when the hardware changes
 
 All three share one idea: **keep hardware specific code small and at the edge, and put everything else into platform independent library crates.**
 

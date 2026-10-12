@@ -99,12 +99,12 @@ The `RawMutex` type parameter decides how the primitive is protected:
 Keeping the library generic over `M: RawMutex` lets the binary choose.
 
 ## Takeaways
-We now have defined a way which allows us to separate:
+We have now defined a way which allows us to separate:
 - Driver code - code specific to a given sensor
-- Sensor data provider - Specific sensor data (e.g. temperature) can be provided via any device on any bus
-- business logic - takes input data from any source and does logic manipulation
+- Sensor data provider - specific sensor data (e.g. temperature) can be provided by any device on any bus
+- Business logic - takes input data from any source and acts on it
 
-=> This aligns very well with rust ownership model.
+This aligns very well with Rust's ownership model.
 
 ## Checklist
 - [ ] logic lives in a `#![no_std]` library crate without HAL dependency

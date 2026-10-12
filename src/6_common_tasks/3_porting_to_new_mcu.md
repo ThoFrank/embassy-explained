@@ -61,7 +61,6 @@ Peripheral names, DMA channels and pin alternate functions differ between chips.
 
 ### 6. Adapters
 Sometimes the new MCU has a different *kind* of peripheral. A typical example on STM32: older chips like the F4 have a bxCAN controller, newer ones like G4 or H5 have FDCAN, and `embassy-stm32` provides different drivers for them.
-Because your CAN drivers only depend on your `CanBus` trait, you just write a new [adapter](./1_writing_a_driver.md#implementing-the-trait-for-real-hardware) for the new peripheral. Nothing else changes.
 
 ### 7. Resources and timing
 Check the assumptions made for the old chip:
