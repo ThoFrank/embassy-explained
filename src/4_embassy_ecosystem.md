@@ -51,6 +51,8 @@ If some work needs a guaranteed reaction time, you can run more than one executo
 This way you can for example run a motor control loop on a high priority executor while networking and logging run on the low priority thread mode executor.
 Tasks on different executors communicate through the primitives in `embassy-sync` (channels, signals, mutexes), which are safe to use across priority levels.
 
+> **Tip:** Check out the [From Zero to Async in Embedded Rust - The Rusty Bits](https://www.youtube.com/watch?v=wni5h5vIPhU) video for a deep dive into concurrency in microcontrollers and how async rust works under the hood.
+
 ## embassy-time
 Almost every program needs to wait for something. [`embassy-time`](https://docs.embassy.dev/embassy-time/) provides `Timer`, `Instant`, `Duration` and `Ticker` together with async delays like `Timer::after_millis(100).await`.
 The time source is a hardware timer provided by the HAL. For `embassy-stm32` you select it with a cargo feature such as `time-driver-any`.
